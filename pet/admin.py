@@ -1,3 +1,10 @@
 from django.contrib import admin
+from .models import Pet
 
-# Register your models here.
+
+@admin.register(Pet)
+class PetsAdmin(admin.ModelAdmin):
+    list_display = ('name', 'color', 'age', 'age_type',
+                    'animal_type', 'available')
+    list_display_links = ('name',)
+    ordering = ('-created_at',)
