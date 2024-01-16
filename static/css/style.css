@@ -1,0 +1,96 @@
+:root {
+	--blue-accent: #16479d;
+	--main-color: #ffc300;
+
+	--footer-bg: #eee;
+	--footer-border: #555;
+
+	--white-bg: #f8f8ff;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline: none;
+	font-family: Helvetica, sans-serif;
+}
+
+body {
+	background-color: var(--white-bg);
+}
+
+h1 {
+	color: var(--blue-accent);
+	margin-bottom: 1em;
+	font-size: 2.1em;
+}
+
+.bold {
+	font-weight: bold;
+	color: var(--blue-accent);
+}
+
+.container {
+	min-height: 60vh;
+	max-width: 1200px;
+
+	margin: 0 auto;
+	padding: 1em 2em 3em;
+}
+
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	padding: 1em 1.5em;
+
+	background-color: var(--main-color);
+	color: var(--blue-accent);
+	box-shadow: 5px 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.navbar_logo {
+	display: flex;
+	align-items: center;
+}
+
+.navbar_logo img {
+	width: 40px;
+	margin-right: 0.8em;
+}
+
+.navbar ul {
+	display: flex;
+	align-items: center;
+	list-style: none;
+}
+
+.navbar li,
+.navbar a {
+	text-decoration: none;
+	color: var(--blue-accent);
+	font-weight: bold;
+	transition: 0.5s;
+	cursor: pointer;
+	padding: 0.5em 0.8em;
+	border-radius: 5px;
+}
+
+.navbar li:hover {
+	background-color: var(--blue-accent);
+	color: #fff;
+}
+
+.navbar li:hover > a {
+	color: #fff;
+}
+
+.footer {
+	height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background-color: var(--footer-bg);
+	border-top: 1px solid var(--footer-border);
+}
