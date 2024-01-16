@@ -1,5 +1,35 @@
-{% include "global/base.html" %}
+{% extends "global/base.html" %}
 
 {% block content %}
+<div class='home_header'>
+    <div>
+        <h1>Adote um pet</h1>
+        <p>Clique em saiba mais para ver mais detalhes do pet.</p>
+    </div>
+    <div>
+        <p>
+            Buscar por:
+            <button>Gatos</button>
+            <button>Cachorros</button>
+            <button>Coelhos</button>
+            <button>Hamsters</button>
+            <button>Todos</button>
+        </p>
+    </div>
+</div>
+<div class="pet_container">
+    <div class='pet_card'>
+        <div
+            {% comment %} img {% endcomment %}
+            class='pet_card_image'
+        ></div>
+        <h3>Neguinha</h3>
+        <p>
+            <span class='bold'>Idade: </span>
+            1 mes
+        </p>
+        <a href='#'>Saiba mais</a>
 
+    </div>
+</div>
 {% endblock content %}
