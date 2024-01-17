@@ -20,10 +20,11 @@
 <div class="pet_container">
     {% for pet in pets %}
         <div class='pet_card'>
-            <div
-                {% comment %} img {% endcomment %}
-                class='pet_card_image'
-            ></div>
+            <div class='pet_card_image'>
+                {% if pet.picture %}
+                    <img class='pet_card_image' src="{{pet.picture.url}}" alt="Pet Image">
+                {% endif %}
+            </div>
             <h3>{{pet.name}}</h3>
             <p>
                 <span class='bold'>Idade: </span>

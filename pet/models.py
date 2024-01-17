@@ -53,6 +53,11 @@ class Pet(models.Model):
 
     available = models.BooleanField(default=True)
 
+    picture = models.ImageField(
+        upload_to='pet_imgs/%Y',
+        blank=True  # TODO REMOVE LINE
+    )
+
     created_at = models.DateField(default=date.today)
 
     def __str__(self):
