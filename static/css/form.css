@@ -1,0 +1,75 @@
+.form_container {
+	max-width: 30rem;
+	margin: 1.5rem auto;
+}
+
+.form-content {
+	margin: 1.5rem 0;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 1.5rem;
+}
+
+.errorlist {
+	list-style: none;
+	font-size: 1.4rem;
+	color: tomato;
+}
+.errorlist.nonfield {
+	color: inherit;
+}
+
+.form-group p {
+	margin: 1em 0;
+}
+
+.form-group .help-text,
+.form-group .help-text ~ ul {
+	margin: 0;
+	font-size: 1.2rem;
+	list-style: none;
+}
+
+.form-group input,
+.form-group select {
+	padding: 1rem;
+	border-radius: 8px;
+	border: 1px solid rgb(0, 83, 134);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+	outline: none;
+	box-shadow: 0 0 5px rgb(0, 83, 134);
+}
+
+.form-group label {
+	font-size: 0.8rem;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.btn {
+	background-color: rgb(0, 83, 134);
+	color: white;
+	font-weight: bold;
+	border: none;
+	padding: 1rem 2rem;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: filter 2s ease-in-out;
+}
+
+.btn:hover {
+	filter: brightness(90%);
+}
+
+.btn:focus,
+.btn:active {
+	filter: brightness(80%);
+	box-shadow: 0 0 5px rgb(0, 83, 134);
+}
