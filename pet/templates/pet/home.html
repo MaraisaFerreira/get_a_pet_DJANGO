@@ -1,4 +1,10 @@
 {% extends "global/base.html" %}
+{% load static %}
+{% block page_css %}
+    <link rel="stylesheet" href="{% static "css/home.css" %}">
+{% endblock page_css %}
+
+{% block doc_title %}Pets{% endblock doc_title %}
 
 {% block content %}
 <div class='home_header'>
