@@ -1,0 +1,31 @@
+{% extends "global/base.html" %}
+{% load static %}
+{% block page_css %}
+<link rel="stylesheet" href="{% static "css/pet.css" %}">
+{% endblock page_css %}
+
+{% block content %}
+<div class="pet_details_container">
+    <div class='petdetails_header'>
+        <h1>{{pet.name}}</h1>
+        <p>Marque uma visita para conhecer o pet. 😊</p>
+    </div>
+    <div class='pet_images'>
+        <img src="{{pet.picture.url}}" alt="{{pet.name}} Image">
+    </div>
+    <p>
+        <span class='bold'>Idade: </span>
+        {{pet.age}} {{pet.get_age_type_display}}&nbsp;
+        <span class='bold'>Cor: </span>
+        {{pet.get_color_display}}
+    </p>
+
+    <button>Solicitar uma Visita</button>
+
+        {% comment %} <p>
+            Você precisa <Link to='/register'>criar uma conta</Link> para
+            solicitar a visita.
+        </p> {% endcomment %}
+
+</div>
+{% endblock content %}

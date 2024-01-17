@@ -10,7 +10,16 @@ def home(request):
         request,
         'pet/home.html',
         {
-            'doc_title': 'Pets',
             'pets': pets_list
         }
+    )
+
+
+def pet_details(request, pet_id):
+    pet = Pet.objects.get(id=pet_id)
+
+    return render(
+        request,
+        'pet/pet.html',
+        {'pet': pet}
     )
