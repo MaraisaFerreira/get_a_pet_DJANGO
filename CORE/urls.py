@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pets/', include('pet.urls')),
+    path('', include('pet.urls')),
     path('', lambda request: redirect('pets:home')),
 ]
 
