@@ -1,11 +1,14 @@
 {% load static %}
 <header class='navbar'>
-    <div class="navbar_logo">
-        <img src="{% static "imgs/cat.png" %}" alt="Logo">
-    </div>
+    <a href="{% url "pets:home" %}">
+        <div class="navbar_logo">
+            <img src="{% static "imgs/cat.png" %}" alt="Logo">
+            <h2>Get A Pet</h2>
+        </div>
+    </a>
     <div>
         <ul>
-            <li><a href="#">Home</a></li>
+            <li><a href="{% url "pets:home" %}">Home</a></li>
             <li><a href="#">Login</a></li>
             <li><a href="#">Cadastrar</a></li>
         </ul>
