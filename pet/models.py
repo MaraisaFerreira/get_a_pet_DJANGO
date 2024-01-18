@@ -45,6 +45,7 @@ class Pet(models.Model):
         ('rabbit', 'Coelho'),
         ('bird', 'Pássaro'),
     ]
+
     animal_type = models.CharField(
         max_length=8,
         choices=TYPE_CHOICES,
@@ -53,12 +54,24 @@ class Pet(models.Model):
 
     available = models.BooleanField(default=True)
 
-    picture = models.ImageField(
-        upload_to='pet_imgs/%Y',
-        blank=True  # TODO REMOVE LINE
-    )
-
     created_at = models.DateField(default=date.today)
 
     def __str__(self):
         return self.name
+
+
+class PetImages(models.Model):
+    picture = models.ImageField(
+        upload_to='pet_imgs/%Y'
+    )
+
+    pet = models.ForeignKey(
+        Pet,
+        on_delete=models.CASCADE
+    )
+
+    class Meta:
+        verbose_name_plural = 'Pet Images'
+
+    def __str__(self):
+        return f'Imagem pet - {self.pet}'

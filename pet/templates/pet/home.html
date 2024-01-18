@@ -24,11 +24,11 @@
     </div>
 </div>
 <div class="pet_container">
-    {% for pet in pets %}
+    {% for pet, imagem in pets %}
         <div class='pet_card'>
             <div class='pet_card_image'>
-                {% if pet.picture %}
-                    <img class='pet_card_image' src="{{pet.picture.url}}" alt="Pet Image">
+                {% if imagem.picture %}
+                    <img class='pet_card_image' src="{{imagem.picture.url}}" alt="Pet Image">
                 {% endif %}
             </div>
             <h3>{{pet.name}}</h3>

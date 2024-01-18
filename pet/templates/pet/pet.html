@@ -11,7 +11,9 @@
         <p>Marque uma visita para conhecer o pet. 😊</p>
     </div>
     <div class='pet_images'>
-        <img src="{{pet.picture.url}}" alt="{{pet.name}} Image">
+        {% for imagem in imagens %}
+            <img src="{{imagem.picture.url}}" alt="{{pet.name}} Image">
+        {% endfor %}
     </div>
     <p>
         <span class='bold'>Idade: </span>
