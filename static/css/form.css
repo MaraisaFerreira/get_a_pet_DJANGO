@@ -53,6 +53,15 @@
 	margin-bottom: 5px;
 }
 
+.form-group-boolean {
+	display: flex;
+	align-items: center;
+}
+
+.form-group-boolean input[type='checkbox'] {
+	margin-left: 10px;
+}
+
 .btn {
 	background-color: rgb(0, 83, 134);
 	color: white;

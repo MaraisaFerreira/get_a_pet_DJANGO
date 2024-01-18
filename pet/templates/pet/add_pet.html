@@ -1,6 +1,28 @@
 {% extends "global/base.html" %}
-{% block title %}TEMP{% endblock title %}
+{% load static %}
+{% block doc_title %}Cadastrar Pet{% endblock doc_title %}
+
+{% block page_css %}
+    <link rel="stylesheet" href="{% static "css/form.css" %}">
+{% endblock page_css %}
 
 {% block content %}
-    {{form}}
+    <div class="form_container">
+        <h1>Cadastrar Pet</h1>
+        {% for field in form %}
+                <div class="form-group">
+                    {% if field.name == 'available' %}
+                        <div class="form-group-boolean">
+                            <label for="{{field.id_for_label}}">{{field.label}}<label>
+                                {{field}}
+                        </div>
+                        {{field.errors}}
+                        {% else %}
+                        <label for="{{field.id_for_label}}">{{field.label}}<label>
+                        {{field}}
+                        {{field.errors}}
+                    {% endif %}
+                </div>
+        {% endfor %}
+    </div>
 {% endblock content %}
