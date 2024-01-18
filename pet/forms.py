@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django import forms
 
+from pet.models import Pet, PetImages
+
 
 class RegisterUser(UserCreationForm):
     first_name = forms.CharField(
@@ -38,3 +40,16 @@ class RegisterUser(UserCreationForm):
             )
 
         return email
+
+
+class PetRegister(forms.ModelForm):
+    class Meta:
+        model = Pet
+        fields = (
+            'name',
+            'color',
+            'age',
+            'age_type',
+            'animal_type',
+            'available'
+        )
