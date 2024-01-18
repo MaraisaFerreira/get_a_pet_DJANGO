@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from pet.models import Pet, PetImages
+from pet.forms import PetRegister
 
 
 def home(request):
@@ -30,4 +31,14 @@ def pet_details(request, pet_id):
             'pet': pet,
             'imagens': imagens
         }
+    )
+
+
+def add_pet(request):
+    form = PetRegister()
+
+    return render(
+        request,
+        'pet/add_pet.html',
+        {'form': form}
     )
