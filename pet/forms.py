@@ -2,9 +2,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django import forms
-from pet import models
 
-from pet.models import Pet, PetImages
+from pet.models import Pet
 
 
 class RegisterUser(UserCreationForm):
@@ -44,6 +43,13 @@ class RegisterUser(UserCreationForm):
 
 
 class PetRegister(forms.ModelForm):
+    picture1 = forms.FileField(
+        required=True,
+        label='Imagens'
+    )
+    picture2 = forms.FileField(label='')
+    picture3 = forms.FileField(label='')
+
     class Meta:
         model = Pet
         fields = (
@@ -52,5 +58,8 @@ class PetRegister(forms.ModelForm):
             'age',
             'age_type',
             'animal_type',
-            'available'
+            'picture1',
+            'picture2',
+            'picture3',
+            'available',
         )
