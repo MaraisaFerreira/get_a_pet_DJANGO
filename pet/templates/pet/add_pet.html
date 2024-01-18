@@ -7,22 +7,7 @@
 {% endblock page_css %}
 
 {% block content %}
-    <div class="form_container">
-        <h1>Cadastrar Pet</h1>
-        {% for field in form %}
-                <div class="form-group">
-                    {% if field.name == 'available' %}
-                        <div class="form-group-boolean">
-                            <label for="{{field.id_for_label}}">{{field.label}}<label>
-                                {{field}}
-                        </div>
-                        {{field.errors}}
-                        {% else %}
-                        <label for="{{field.id_for_label}}">{{field.label}}<label>
-                        {{field}}
-                        {{field.errors}}
-                    {% endif %}
-                </div>
-        {% endfor %}
-    </div>
+<div class='form_container'>
+    {% include "pet/partials/_pet_form.html" %}
+</div>
 {% endblock content %}

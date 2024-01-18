@@ -1,0 +1,30 @@
+<form action="{{ form_action }}" method="POST">
+    {% csrf_token %}
+    <h1>Cadastrar Pet</h1>
+    {% for field in form %}
+    {% if field.name == 'available' %}
+        <div class="form-content">
+            <div class="form-group">
+                <div class="form-group-boolean">
+                    <label for="{{field.id_for_label}}">{{field.label}}</label>
+                    {{field}}
+                </div>
+            </div>
+            {{field.errors}}
+        </div>
+    {% else %}
+        <div class="form-group">
+            <label for="{{field.id_for_label}}">{{field.label}}</label>
+            {{field}}
+            {{field.errors}}
+        </div>
+    {%endif%}
+
+    {% endfor %}
+
+    <div class="form-content">
+        <div class="form-group">
+            <button class="btn" type="submit">Send</button>
+        </div>
+    </div>
+</form>
