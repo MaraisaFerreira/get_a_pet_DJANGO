@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from pet.models import Pet, PetImages
 from pet.forms import PetRegister
 
 
 def home(request):
-    all_pets = Pet.objects.all()
+    all_pets = Pet.objects.all().order_by('-id')
 
     pet_list = []
     for pet in all_pets:
@@ -36,6 +36,18 @@ def pet_details(request, pet_id):
 
 def add_pet(request):
     form = PetRegister()
+
+    if request.method == 'POST':
+        form = PetRegister(request.POST)
+
+        if form.is_valid():
+            pet = form.save()
+            files = request.FILES.getlist('images')
+
+            for file in files:
+                PetImages(picture=file, pet=pet).save()
+
+        return redirect('pets:home')
 
     return render(
         request,
