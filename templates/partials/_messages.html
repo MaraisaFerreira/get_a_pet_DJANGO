@@ -1,0 +1,10 @@
+{% load static %}
+{% block page_css %}
+    <link rel="stylesheet" href="{% static "css/messages.css" %}">
+{% endblock page_css %}
+
+{% if messages %}
+{% for message in messages %}
+    <div class="message {{ message.tags }}">{{ message }}</div>
+{% endfor %}
+{% endif %}

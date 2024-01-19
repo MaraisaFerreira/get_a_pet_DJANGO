@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from pet.models import Pet, PetImages
 from pet.forms import PetRegister
+from django.contrib import messages
 
 
 def home(request):
@@ -46,6 +47,8 @@ def add_pet(request):
 
             for file in files:
                 PetImages(picture=file, pet=pet).save()
+
+        messages.success(request, 'Pet Cadastrado.')
 
         return redirect('pets:home')
 

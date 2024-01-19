@@ -1,0 +1,23 @@
+.message {
+	max-width: 600px;
+	margin: 1.5rem auto;
+	padding: 1.5rem;
+	text-align: center;
+	border-radius: 4px;
+	font-size: 1.4rem;
+}
+
+.message.success {
+	background: rgba(0, 255, 0, 0.3);
+	border: 1px solid rgba(0, 255, 0, 90%);
+}
+
+.message.error {
+	background: rgba(255, 0, 0, 0.3);
+	border: 1px solid rgba(255, 0, 0, 90%);
+}
+
+.message.warning {
+	background: rgba(255, 255, 0, 0.3);
+	border: 1px solid rgba(255, 255, 0, 90%);
+}
