@@ -6,7 +6,7 @@
         <div class="form-content">
             <div class="form-group">
                 <div class="form-group-boolean">
-                    <label for="{{field.id_for_label}}">{{field.label}}</label>
+                    <label for="{{field.id_for_label}}">{{field.label_tag}}</label>
                     {{field}}
                 </div>
             </div>
@@ -22,6 +22,12 @@
 
     {% endfor %}
 
+    <div class="form-content">
+        <div class="form-group">
+            <label for="name">Imagens</label>
+            <input type="file" name="images" multiple required>
+        </div>
+    </div>
     <div class="form-content">
         <div class="form-group">
             <button class="btn" type="submit">Send</button>

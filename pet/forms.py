@@ -43,13 +43,6 @@ class RegisterUser(UserCreationForm):
 
 
 class PetRegister(forms.ModelForm):
-    picture1 = forms.FileField(
-        required=True,
-        label='Imagens'
-    )
-    picture2 = forms.FileField(label='')
-    picture3 = forms.FileField(label='')
-
     class Meta:
         model = Pet
         fields = (
@@ -58,8 +51,13 @@ class PetRegister(forms.ModelForm):
             'age',
             'age_type',
             'animal_type',
-            'picture1',
-            'picture2',
-            'picture3',
             'available',
         )
+        labels = {
+            'name': 'Nome',
+            'color': 'Cor',
+            'age': 'Idade',
+            'age_type': 'Dias?',
+            'animal_type': 'Tipo de Animal',
+            'available': 'Disponível',
+        }
