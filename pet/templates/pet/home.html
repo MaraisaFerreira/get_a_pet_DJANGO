@@ -36,7 +36,7 @@
                 <span class='bold'>Idade: </span>
                 {{pet.age}} {{pet.get_age_type_display}}
             </p>
-            <a href='#'>Saiba mais</a>
+            <a href='{% url "pets:pet_detail" pet.id %}'>Saiba mais</a>
         </div>
     {% endfor %}
 </div>
