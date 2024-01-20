@@ -6,11 +6,17 @@
             <h2>Get A Pet</h2>
         </div>
     </a>
-
     <ul>
-        <li><a href="{% url "pets:home" %}">Home</a></li>
-        <li><a href="{% url "pets:login" %}">Login</a></li>
-        <li><a href="{% url "pets:register" %}">Cadastrar</a></li>
+        {% if user.is_authenticated %}
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Minhas Adoções</a></li>
+            <li><a href="#">Meus Pets</a></li>
+            <li><a href="{% url "pets:logout" %}">Sair</a></li>
+        {% else %}
+            <li><a href="{% url "pets:home" %}">Home</a></li>
+            <li><a href="{% url "pets:login" %}">Login</a></li>
+            <li><a href="{% url "pets:register" %}">Cadastrar</a></li>
+        {% endif %}
     </ul>
 
 </header>
