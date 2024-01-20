@@ -9,6 +9,7 @@
 <div class="form_container">
     <h1>Login</h1>
     <form action="{{form_action}}" method="post">
+        {% csrf_token %}
         {% for field in form %}
             <div class="form-content">
                 <div class="form-group">
