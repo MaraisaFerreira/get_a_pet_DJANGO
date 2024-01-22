@@ -15,7 +15,7 @@
         {% if pets %}
             {% for pet, image, adopter in pets %}
                 <div  class='petlist_row'>
-                    <img src="{{image.picture.url}}" alt="{{pet.name}} Image">
+                    <img src="{{image.picture.url}}" alt="{{pet.name}}">
                     <span class='bold'>{{pet.name}}</span>
                     {% if pet.available and adopter %}
                         <p>
