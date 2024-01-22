@@ -17,45 +17,41 @@
                 <div  class='petlist_row'>
                     <img src="{{image.picture.url}}" alt="{{pet.name}}">
                     <span class='bold'>{{pet.name}}</span>
-                    {% if pet.available and adopter %}
-                        <p>
-                            Visita solicitada por:
-                            <span class='bold'>{{adopter.first_name}}</span>
-                            <br></br>
-                            Telefone:
-                            <span class='bold'> Dono phone TEMP </span>
-                        </p>
+                    {% if adopter %}
+                        {% if pet.available %}
+                            <p>
+                                Visita solicitada por:
+                                <span class='bold'>{{adopter.first_name}}</span>
+                                <br></br>
+                                Telefone:
+                                <span class='bold'> Dono phone TEMP </span>
+                            </p>
+                        {% else %}
+                            <p>
+                                Adotado por:
+                                <span class='bold'>{{adopter}}</span>
+                                <br></br>
+                                Telefone:
+                                <span class='bold'> AD PHONE </span>
+                            </p>
+                        {% endif %}
                     {% endif %}
-                    {% if adopter and not pet.available %}
-                        <p>
-                            Adotado por:
-                            <span class='bold'>{{adopter}}</span>
-                            <br></br>
-                            Telefone:
-                            <span class='bold'> AD PHONE </span>
-                        </p>
-                    {% endif %}
-
-                        <div class='actions'>
-                            {% if pet.available %}
-                                <button class='conclude_btn' >                             Concluir adoção
-                                </button>
-                                <button
-                                    class='refuse_btn'>
-                                    Recusar adoção
-                                </button>
-                            {% endif %}
-                            <a href='#'>Editar</a>
-                            <button>
-                                Excluir
-                            </button>
-                            <p>Pet já adotado.</p>
-                        </div>
+                    {% if pet.available %}
+                    <div class='actions'>
+                        {% if adopter %}
+                            <button class='conclude_btn' >Concluir adoção</button>
+                            <button class='refuse_btn'>Recusar adoção</button>
+                        {% endif %}
+                        <a href='#'>Editar</a>
+                        <button>Excluir</button>
                     </div>
-                    {% endfor %}
-                {% else %}
-                    <p>Você ainda não cadastrou nenhum pet.</p>
-                </div>
-                {% endif %}
-    </section>
+                    {% else %}
+                        <p>Pet já adotado.</p>
+                    {% endif %}
+            {% endfor %}
+        {% else %}
+             <p>Você ainda não cadastrou nenhum pet.</p>
+        {% endif %}
+    </div>
+</section>
 {% endblock content %}
