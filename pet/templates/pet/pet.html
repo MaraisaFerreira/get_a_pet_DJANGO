@@ -3,6 +3,7 @@
 {% block page_css %}
 <link rel="stylesheet" href="{% static "css/pet.css" %}">
 {% endblock page_css %}
+{% block doc_title %}{{pet.name}}{% endblock doc_title %}
 
 {% block content %}
 <div class="pet_details_container">
@@ -24,10 +25,9 @@
 
     <button>Solicitar uma Visita</button>
 
-        {% comment %} <p>
-            Você precisa <Link to='/register'>criar uma conta</Link> para
-            solicitar a visita.
-        </p> {% endcomment %}
+    <p>
+        Você precisa <a href='{% url "pets:register" %}'>criar uma conta</a> para solicitar a visita.
+    </p>
 
 </div>
 {% endblock content %}
