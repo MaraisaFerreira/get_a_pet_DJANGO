@@ -124,3 +124,22 @@ def delete_pet(request, pet_id):
         messages.error(request, 'Voce não pode apagar esse pet.')
 
     return redirect('pets:my_pets')
+
+
+def confirm_adoption(request, pet_id):
+    user = auth.get_user(request)
+    pet = Pet.objects.get(id=pet_id)
+
+    if pet.owner_id != user.id:
+        messages.error(request, 'Voce não pode realizar esta ação.')
+        return redirect('pets:my_pets')
+
+    pet.available = False
+    pet.save()
+    messages.success(request, 'Pet adotado')
+
+    return redirect('pets:my_pets')
+
+
+def refuse_adoption(request, pet_id):
+    ...

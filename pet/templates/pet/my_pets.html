@@ -36,21 +36,19 @@
                             </p>
                         {% endif %}
                     {% endif %}
-                    {% if pet.available %}
                     <div class='actions'>
-                        {% if adopter %}
-                            <button class='conclude_btn' >Concluir adoção</button>
-                            <button class='refuse_btn'>Recusar adoção</button>
+                        {% if pet.available %}
+                            {% if adopter %}
+                                <a class='conclude_btn' href='{% url "pets:confirm_adoption" pet.id %}'>Concluir adoção</a>
+                                <a class='refuse_btn' href='{% url "pets:refuse_adoption" pet.id %}'>Recusar adoção</a>
+                            {% endif %}
+                            <a href='{% url "pets:edit_pet" pet.id %}'>Editar</a>
+                            <a href='{% url "pets:delete_pet" pet.id%}'>Excluir</a>
+                        {% else %}
+                            <p>Pet já adotado.</p>
                         {% endif %}
-                        <a href='{% url "pets:edit_pet" pet.id %}'>Editar</a>
-                        <form action="{% url "pets:delete_pet" pet.id%}" method="post">
-                            {% csrf_token %}
-                            <button type='submit'>Excluir</button>
-                        </form>
                     </div>
-                    {% else %}
-                        <p>Pet já adotado.</p>
-                    {% endif %}
+                </div>
             {% endfor %}
         {% else %}
              <p>Você ainda não cadastrou nenhum pet.</p>
