@@ -1,10 +1,57 @@
 {% extends "global/base.html" %}
 {% load static %}
 {% block page_css %}
-<link rel="stylesheet" href="{% static "css/pet.css" %}">
+<link rel="stylesheet" href="{% static "css/pets_list.css" %}">
 {% endblock page_css %}
 {% block doc_title %}Meus Pets{% endblock doc_title %}
 
 {% block content %}
-    <h1>Meus Pets Cadastrados</h1>
+<section>
+    <div class='petslist_header'>
+        <h1>Meus pets cadastrados.</h1>
+        <a href='{% url "pets:add_pet" %}'>Cadastrar Pet</a>
+    </div>
+    <div class='pet_container'>
+        {% if pets %}
+            {% for pet in pets %}
+                <div  class='petlist_row'>
+                    {% comment %}  <img src="{{}}" alt=""> {% endcomment %}
+                    <span class='bold'>{{pet.name}}</span>
+                        <p>
+                            Visita solicitada por:
+                            <span class='bold'> Dono Nome TEMP </span>
+                            <br></br>
+                            Telefone:
+                            <span class='bold'> Dono phone TEMP </span>
+                        </p>
+                        <p>
+                            Adotado por:
+                            <span class='bold'> ADOTANTE </span>
+                            <br></br>
+                            Telefone:
+                            <span class='bold'> AD PHONE </span>
+                        </p>
+
+                        <div class='actions'>
+                            {% if pet.available %}
+                                <button class='conclude_btn' >                             Concluir adoção
+                                </button>
+                                <button
+                                    class='refuse_btn'>
+                                    Recusar adoção
+                                </button>
+                            {% endif %}
+                            <a href='#'>Editar</a>
+                            <button>
+                                Excluir
+                            </button>
+                            <p>Pet já adotado.</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Você ainda não cadastrou nenhum pet.</p>
+                </div>
+                {% endif %}
+    </section>
 {% endblock content %}

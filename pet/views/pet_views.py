@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from pet.models import Pet, PetImages
 from pet.forms import PetRegister
-from django.contrib import messages
+from django.contrib import messages, auth
 
 
 def home(request):
@@ -60,7 +60,11 @@ def add_pet(request):
 
 
 def my_pets(request):
+    user = auth.get_user(request)
+    pets = Pet.objects.all().filter(owner_id=user.id)
+
     return render(
         request,
-        'pet/my_pets.html'
+        'pet/my_pets.html',
+        {'pets': pets}
     )
