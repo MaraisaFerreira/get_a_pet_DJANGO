@@ -13,24 +13,28 @@
     </div>
     <div class='pet_container'>
         {% if pets %}
-            {% for pet in pets %}
+            {% for pet, image, adopter in pets %}
                 <div  class='petlist_row'>
-                    {% comment %}  <img src="{{}}" alt=""> {% endcomment %}
+                    <img src="{{image.picture.url}}" alt="{{pet.name}} Image">
                     <span class='bold'>{{pet.name}}</span>
+                    {% if pet.available and adopter %}
                         <p>
                             Visita solicitada por:
-                            <span class='bold'> Dono Nome TEMP </span>
+                            <span class='bold'>{{adopter.first_name}}</span>
                             <br></br>
                             Telefone:
                             <span class='bold'> Dono phone TEMP </span>
                         </p>
+                    {% endif %}
+                    {% if adopter and not pet.available %}
                         <p>
                             Adotado por:
-                            <span class='bold'> ADOTANTE </span>
+                            <span class='bold'>{{adopter}}</span>
                             <br></br>
                             Telefone:
                             <span class='bold'> AD PHONE </span>
                         </p>
+                    {% endif %}
 
                         <div class='actions'>
                             {% if pet.available %}

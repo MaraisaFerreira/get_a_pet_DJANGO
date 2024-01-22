@@ -59,7 +59,15 @@ class Pet(models.Model):
     created_at = models.DateField(default=date.today)
     owner = models.ForeignKey(
         User,
+        related_name='owned_pets',
         on_delete=models.CASCADE
+    )
+    adopter = models.ForeignKey(
+        User,
+        related_name='adopted_pets',
+        default=None,
+        null=True,
+        on_delete=models.SET_NULL
     )
 
     def __str__(self):
