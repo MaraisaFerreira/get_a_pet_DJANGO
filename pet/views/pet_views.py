@@ -55,7 +55,7 @@ def add_pet(request):
 
         messages.success(request, 'Pet Cadastrado.')
 
-        return redirect('pets:home')
+        return redirect('pets:my_pets')
 
     return render(
         request,
@@ -85,4 +85,29 @@ def my_pets(request):
         request,
         'pet/my_pets.html',
         {'pets': pets_list}
+    )
+
+
+def edit_pet(request, pet_id):
+    pet = Pet.objects.get(id=pet_id)
+    form = PetRegister(instance=pet)
+
+    if request.method == 'POST':
+        form = PetRegister(request.POST, instance=pet)
+
+        if form.is_valid():
+            pet = form.save()
+            files = request.FILES.getlist('images')
+
+            for file in files:
+                PetImages(picture=file, pet=pet).save()
+
+            messages.success(request, 'Pet Atualizado.')
+
+            return redirect('pets:my_pets')
+
+    return render(
+        request,
+        'pet/add_pet.html',
+        {'form': form}
     )

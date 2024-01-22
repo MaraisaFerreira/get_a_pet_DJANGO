@@ -42,7 +42,7 @@
                             <button class='conclude_btn' >Concluir adoção</button>
                             <button class='refuse_btn'>Recusar adoção</button>
                         {% endif %}
-                        <a href='#'>Editar</a>
+                        <a href='{% url "pets:edit_pet" pet.id %}'>Editar</a>
                         <button>Excluir</button>
                     </div>
                     {% else %}
