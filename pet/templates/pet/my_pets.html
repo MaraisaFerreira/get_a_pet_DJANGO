@@ -43,7 +43,10 @@
                             <button class='refuse_btn'>Recusar adoção</button>
                         {% endif %}
                         <a href='{% url "pets:edit_pet" pet.id %}'>Editar</a>
-                        <button>Excluir</button>
+                        <form action="{% url "pets:delete_pet" pet.id%}" method="post">
+                            {% csrf_token %}
+                            <button type='submit'>Excluir</button>
+                        </form>
                     </div>
                     {% else %}
                         <p>Pet já adotado.</p>

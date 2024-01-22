@@ -111,3 +111,16 @@ def edit_pet(request, pet_id):
         'pet/add_pet.html',
         {'form': form}
     )
+
+
+def delete_pet(request, pet_id):
+    pet = Pet.objects.get(id=pet_id)
+    user = auth.get_user(request)
+
+    if pet.owner_id == user.id:
+        pet.delete()
+        messages.success(request, 'Pet removido')
+    else:
+        messages.error(request, 'Voce não pode apagar esse pet.')
+
+    return redirect('pets:my_pets')
