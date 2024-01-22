@@ -1,5 +1,7 @@
+from email.policy import default
 from django.db import models
 from django.core.validators import MinValueValidator
+from django.contrib.auth.models import User
 from datetime import date
 
 
@@ -55,6 +57,10 @@ class Pet(models.Model):
     available = models.BooleanField(default=True)
 
     created_at = models.DateField(default=date.today)
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return self.name
