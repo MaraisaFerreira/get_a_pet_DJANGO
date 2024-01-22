@@ -57,3 +57,10 @@ def add_pet(request):
         'pet/add_pet.html',
         {'form': form}
     )
+
+
+def my_pets(request):
+    return render(
+        request,
+        'pet/my_pets.html'
+    )

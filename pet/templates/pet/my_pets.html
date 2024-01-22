@@ -1,0 +1,10 @@
+{% extends "global/base.html" %}
+{% load static %}
+{% block page_css %}
+<link rel="stylesheet" href="{% static "css/pet.css" %}">
+{% endblock page_css %}
+{% block doc_title %}Meus Pets{% endblock doc_title %}
+
+{% block content %}
+    <h1>Meus Pets Cadastrados</h1>
+{% endblock content %}
