@@ -142,4 +142,14 @@ def confirm_adoption(request, pet_id):
 
 
 def refuse_adoption(request, pet_id):
-    ...
+    user = auth.get_user(request)
+    pet = Pet.objects.get(id=pet_id)
+
+    if pet.owner_id != user.id:
+        messages.error(request, 'Voce não pode realizar essa ação.')
+        return redirect('pets:my_pets')
+
+    pet.adopter_id = None
+    messages.success(request, 'Adoção recusada.')
+
+    return redirect('pets:my_pets')
