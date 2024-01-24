@@ -99,6 +99,10 @@ def edit_pet(request, pet_id):
             pet = form.save()
             files = request.FILES.getlist('images')
 
+            old_images = PetImages.objects.filter(pet_id=pet.id)
+            for old in old_images:
+                old.delete()
+
             for file in files:
                 PetImages(picture=file, pet=pet).save()
 
