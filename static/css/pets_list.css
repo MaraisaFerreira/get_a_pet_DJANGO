@@ -11,19 +11,19 @@
 
 .petslist_header a {
 	text-decoration: none;
-	background-color: var(--blue-accent);
+	background-color: #16479d;
 	color: #fff;
 	font-weight: bold;
 	cursor: pointer;
 	transition: 0.5s;
 	padding: 0.5em 0.8em;
 	border-radius: 5px;
-	border: 2px solid var(--blue-accent);
+	border: 2px solid #16479d;
 }
 
 .petslist_header a:hover {
 	background-color: transparent;
-	color: var(--blue-accent);
+	color: #16479d;
 }
 
 .petslist_container {
@@ -32,7 +32,7 @@
 }
 
 .petlist_row {
-	border-bottom: 1px solid var(--blue-accent);
+	border-bottom: 1px solid #16479d;
 	padding: 1em;
 	margin: 1em;
 	display: flex;
@@ -57,7 +57,7 @@
 }
 
 .actions p {
-	color: var(--blue-accent);
+	color: #16479d;
 	font-weight: bold;
 	font-size: 1.3em;
 }
@@ -65,8 +65,8 @@
 .actions a,
 .actions button {
 	text-decoration: none;
-	color: var(--blue-accent);
-	border: 2px solid var(--blue-accent);
+	color: #16479d;
+	border: 2px solid #16479d;
 	border-radius: 5px;
 	padding: 7px 12px;
 	background-color: #fff;
@@ -78,7 +78,7 @@
 
 .actions a:hover,
 .actions button:hover {
-	background-color: var(--blue-accent);
+	background-color: #16479d;
 	color: #fff;
 }
 
