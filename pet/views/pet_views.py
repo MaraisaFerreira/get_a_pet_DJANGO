@@ -154,6 +154,8 @@ def refuse_adoption(request, pet_id):
         return redirect('pets:my_pets')
 
     pet.adopter_id = None
+    pet.available = True
+    pet.save()
     messages.success(request, 'Adoção recusada.')
 
     return redirect('pets:my_pets')
