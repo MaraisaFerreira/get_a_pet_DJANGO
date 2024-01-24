@@ -23,7 +23,7 @@
 	box-shadow: 1px 1px 5px #0005;
 }
 
-.pet_details_container button {
+.pet_details_container a.btn-link {
 	border-radius: 8px;
 	background-color: #25b456;
 	color: #fff;
@@ -35,13 +35,25 @@
 	font-size: 1.1em;
 	font-weight: bold;
 }
-
-.pet_details_container button:hover {
-	background-color: #1c8a42;
+.action {
+	padding-top: 20px;
 }
 
-.pet_details_container a {
-	text-decoration: none;
-	color: var(--blue-accent);
+.action a.btn-act {
+	border-radius: 8px;
+	color: white;
+	background-color: #25b456;
+	border: none;
+	min-width: 100px;
+	padding: 15px;
+	width: 100%;
+	cursor: pointer;
+	font-size: 1.1em;
 	font-weight: bold;
+	text-decoration: none;
+}
+
+.action a.btn-act:hover {
+	background-color: #20974a;
+	color: #fff;
 }
