@@ -114,6 +114,11 @@ def edit_pet(request, pet_id):
     pet = Pet.objects.get(id=pet_id)
     form = PetRegister(instance=pet)
 
+    user = auth.get_user(request)
+    if user.id != pet.owner_id:
+        messages.error(request, 'Esse pet não é seu.')
+        return redirect('pets:my_pets')
+
     if request.method == 'POST':
         form = PetRegister(request.POST, instance=pet)
 
