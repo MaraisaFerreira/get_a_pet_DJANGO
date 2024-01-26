@@ -9,7 +9,7 @@
 	margin-bottom: 0.3em;
 }
 
-.home_header button {
+.home_header a {
 	text-decoration: none;
 	color: #16479d;
 	font-weight: bold;
@@ -22,7 +22,7 @@
 	background-color: transparent;
 }
 
-.home_header button:hover {
+.home_header a:hover {
 	background-color: #ffd400;
 	color: #fff;
 }

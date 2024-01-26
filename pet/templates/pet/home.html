@@ -15,11 +15,11 @@
     <div>
         <p>
             Buscar por:
-            <button>Gatos</button>
-            <button>Cachorros</button>
-            <button>Coelhos</button>
-            <button>Hamsters</button>
-            <button>Todos</button>
+            <a href='{% url "pets:search" "cat" %}'>Gatos</a>
+            <a href='{% url "pets:search" "dog" %}'>Cachorros</a>
+            <a href='{% url "pets:search" "rabbit" %}'>Coelhos</a>
+            <a href='{% url "pets:search" "hamster" %}'>Hamsters</a>
+            <a href='{% url "pets:search" "all" %}'>Todos</a>
         </p>
     </div>
 </div>

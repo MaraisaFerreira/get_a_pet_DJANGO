@@ -192,3 +192,21 @@ def my_adoptions(request):
             'pets': pet_list
         }
     )
+
+
+def search_type(request, type):
+    if type == 'all':
+        pets = Pet.objects.all()
+    else:
+        pets = Pet.objects.filter(animal_type=type)
+
+    pets_list = []
+    for pet in pets:
+        image = PetImages.objects.filter(pet_id=pet.id).first()
+        pets_list.append((pet, image))
+
+    return render(
+        request,
+        'pet/home.html',
+        {'pets': pets_list}
+    )

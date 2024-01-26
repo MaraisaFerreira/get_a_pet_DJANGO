@@ -17,6 +17,8 @@ urlpatterns = [
          views.confirm_adoption, name='confirm_adoption'),
     path('pet/refuse_adoption/<int:pet_id>/',
          views.refuse_adoption, name='refuse_adoption'),
+    path('pet/search/<str:type>/',
+         views.search_type, name='search'),
 
     # user
     path('register/', views.register_user, name='register'),
