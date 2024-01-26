@@ -1,0 +1,43 @@
+{% extends "global/base.html" %}
+{% load static %}
+{% block page_css %}
+<link rel="stylesheet" href="{% static "css/pets_list.css" %}">
+{% endblock page_css %}
+{% block doc_title %}Minhas Adoções{% endblock doc_title %}
+
+{% block content %}
+<section>
+    <div class='petslist_header'>
+        <h1>Suas Adoções</h1>
+    </div>
+    <div class='pet_container'>
+        {% if pets %}
+            {% for pet, image, owner in pets %}
+                <div  class='petlist_row'>
+                    <img src="{{image.picture.url}}" alt="{{pet.name}}">
+                    <span class='bold'>{{pet.name}}</span>
+                        {% if pet.available %}
+                            <p>
+                                Entre em contato com:
+                                <span class='bold'>{{owner.first_name}}</span>
+                                <br></br>
+                                Telefone:
+                                <span class='bold'> Dono phone TEMP </span>
+                            </p>
+                        {% else %}
+                        <div class='actions'>
+                            <p>
+                                <span class='bold'>Voce já finalizou a adoção desse pet.</span>
+                            </p>
+
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+             <p>Você ainda não adotou nenhum pet.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock content %}

@@ -159,3 +159,36 @@ def refuse_adoption(request, pet_id):
     messages.success(request, 'Adoção recusada.')
 
     return redirect('pets:my_pets')
+
+
+def schedule(request, pet_id):
+    user = auth.get_user(request)
+    pet = Pet.objects.get(id=pet_id)
+
+    if user.id == pet.owner_id:
+        messages.error(request, 'Este pet já é seu.')
+        return redirect('pets:pet_detail', pet_id)
+
+    pet.adopter_id = user.id
+    pet.save()
+    messages.success(request, 'Visita agendada.')
+    return redirect('pets:my_adoptions')
+
+
+def my_adoptions(request):
+    user = auth.get_user(request)
+    pets = Pet.objects.filter(adopter_id=user.id)
+
+    pet_list = []
+    for pet in pets:
+        image = PetImages.objects.get(pet_id=pet.id)
+        owner = User.objects.get(id=pet.owner_id)
+        pet_list.append((pet, image, owner))
+
+    return render(
+        request,
+        'pet/my_adoptions.html',
+        {
+            'pets': pet_list
+        }
+    )
