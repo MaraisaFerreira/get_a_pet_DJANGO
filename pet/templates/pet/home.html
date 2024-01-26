@@ -36,7 +36,11 @@
                 <span class='bold'>Idade: </span>
                 {{pet.age}} {{pet.get_age_type_display}}
             </p>
-            <a href='{% url "pets:pet_detail" pet.id %}'>Saiba mais</a>
+            {% if pet.adopter_id %}
+                <a class='reserved' href='{% url "pets:pet_detail" pet.id %}'>Adoção em Andamento</a>
+            {% else %}
+                <a href='{% url "pets:pet_detail" pet.id %}'>Saiba mais</a>
+            {% endif %}
         </div>
     {% endfor %}
 </div>
