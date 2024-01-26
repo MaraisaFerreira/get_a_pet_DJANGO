@@ -1,9 +1,9 @@
 from django.shortcuts import redirect, render
-from pet import forms
 from pet.models import Pet, PetImages
 from pet.forms import PetRegister
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -37,6 +37,26 @@ def pet_details(request, pet_id):
     )
 
 
+def search_type(request, type):
+    if type == 'all':
+        pets = Pet.objects.all()
+    else:
+        pets = Pet.objects.filter(animal_type=type)
+
+    pets_list = []
+    for pet in pets:
+        image = PetImages.objects.filter(pet_id=pet.id).first()
+        pets_list.append((pet, image))
+
+    return render(
+        request,
+        'pet/home.html',
+        {'pets': pets_list}
+    )
+
+
+# protected routes
+@login_required(login_url='pets:login')
 def add_pet(request):
     user = auth.get_user(request)
     form = PetRegister()
@@ -64,6 +84,7 @@ def add_pet(request):
     )
 
 
+@login_required(login_url='pets:login')
 def my_pets(request):
     user = auth.get_user(request)
     pets = Pet.objects.all().filter(owner_id=user.id)
@@ -88,6 +109,7 @@ def my_pets(request):
     )
 
 
+@login_required(login_url='pets:login')
 def edit_pet(request, pet_id):
     pet = Pet.objects.get(id=pet_id)
     form = PetRegister(instance=pet)
@@ -117,6 +139,7 @@ def edit_pet(request, pet_id):
     )
 
 
+@login_required(login_url='pets:login')
 def delete_pet(request, pet_id):
     pet = Pet.objects.get(id=pet_id)
     user = auth.get_user(request)
@@ -130,6 +153,7 @@ def delete_pet(request, pet_id):
     return redirect('pets:my_pets')
 
 
+@login_required(login_url='pets:login')
 def confirm_adoption(request, pet_id):
     user = auth.get_user(request)
     pet = Pet.objects.get(id=pet_id)
@@ -145,6 +169,7 @@ def confirm_adoption(request, pet_id):
     return redirect('pets:my_pets')
 
 
+@login_required(login_url='pets:login')
 def refuse_adoption(request, pet_id):
     user = auth.get_user(request)
     pet = Pet.objects.get(id=pet_id)
@@ -161,6 +186,7 @@ def refuse_adoption(request, pet_id):
     return redirect('pets:my_pets')
 
 
+@login_required(login_url='pets:login')
 def schedule(request, pet_id):
     user = auth.get_user(request)
     pet = Pet.objects.get(id=pet_id)
@@ -175,6 +201,7 @@ def schedule(request, pet_id):
     return redirect('pets:my_adoptions')
 
 
+@login_required(login_url='pets:login')
 def my_adoptions(request):
     user = auth.get_user(request)
     pets = Pet.objects.filter(adopter_id=user.id)
@@ -191,22 +218,4 @@ def my_adoptions(request):
         {
             'pets': pet_list
         }
-    )
-
-
-def search_type(request, type):
-    if type == 'all':
-        pets = Pet.objects.all()
-    else:
-        pets = Pet.objects.filter(animal_type=type)
-
-    pets_list = []
-    for pet in pets:
-        image = PetImages.objects.filter(pet_id=pet.id).first()
-        pets_list.append((pet, image))
-
-    return render(
-        request,
-        'pet/home.html',
-        {'pets': pets_list}
     )
