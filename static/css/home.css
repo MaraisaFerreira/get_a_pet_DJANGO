@@ -62,7 +62,8 @@
 	margin-bottom: 1em;
 }
 
-.pet_card a {
+.pet_card a,
+p.adopted {
 	border-radius: 8px;
 	color: #16479d;
 	background-color: #ffd400;
@@ -81,8 +82,13 @@
 	color: #fff;
 }
 
-.pet_card a.reserved {
+.pet_card a.reserved,
+p.adopted {
 	background-color: #faf2ce;
+}
+
+.pet_card p.adopted {
+	cursor: default;
 }
 
 .pet_card a.reserved:hover {

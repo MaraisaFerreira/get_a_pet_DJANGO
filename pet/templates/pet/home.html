@@ -37,7 +37,11 @@
                 {{pet.age}} {{pet.get_age_type_display}}
             </p>
             {% if pet.adopter_id %}
-                <a class='reserved' href='{% url "pets:pet_detail" pet.id %}'>Adoção em Andamento</a>
+                {% if pet.available %}
+                    <a class='reserved' href='{% url "pets:pet_detail" pet.id %}'>Adoção em Andamento</a>
+                {% else %}
+                    <p class='adopted'>Pet Adotado 😊</p>
+                {% endif %}
             {% else %}
                 <a href='{% url "pets:pet_detail" pet.id %}'>Saiba mais</a>
             {% endif %}
