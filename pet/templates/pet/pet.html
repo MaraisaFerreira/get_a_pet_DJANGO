@@ -25,7 +25,13 @@
 
     <div class='action'>
         {% if user.is_authenticated %}
-            <a class='btn-act' href='{% url "pets:schedule" pet.id %}'>Solicitar uma visita.</a>
+            {% if pet.adopter_id %}
+                <p class='bold'>Adoção em andamento.
+                    <br>Escolha outro pet.
+                    <br>Ou aguarde o desenrolar da adoção.</p>
+            {% else %}
+                <a class='btn-act' href='{% url "pets:schedule" pet.id %}'>Solicitar uma visita.</a>
+            {% endif %}
         {% else %}
             <p>
                 Você precisa <a href='{% url "pets:register" %}'>criar uma conta</a> para solicitar a visita.
