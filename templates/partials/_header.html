@@ -9,7 +9,7 @@
     <ul>
         {% if user.is_authenticated %}
             <li><a href="{% url "pets:home" %}">Home</a></li>
-            <li><a href="#">Minhas Adoções</a></li>
+            <li><a href="{% url "pets:my_adoptions" %}">Minhas Adoções</a></li>
             <li><a href="{% url "pets:my_pets" %}">Meus Pets</a></li>
             <li><a href="{% url "pets:logout" %}">Sair</a></li>
         {% else %}
