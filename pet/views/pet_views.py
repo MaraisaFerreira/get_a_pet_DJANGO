@@ -181,7 +181,7 @@ def my_adoptions(request):
 
     pet_list = []
     for pet in pets:
-        image = PetImages.objects.get(pet_id=pet.id)
+        image = PetImages.objects.filter(pet_id=pet.id).first()
         owner = User.objects.get(id=pet.owner_id)
         pet_list.append((pet, image, owner))
 
