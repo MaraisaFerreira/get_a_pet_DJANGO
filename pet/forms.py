@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django import forms
+import re
 
 from pet.models import Pet
 
@@ -22,6 +23,12 @@ class RegisterUser(UserCreationForm):
         min_length=3
     )
 
+    phone = forms.CharField(
+        required=True,
+        min_length=10,
+        max_length=15
+    )
+
     class Meta:
         model = User
         fields = (
@@ -40,6 +47,21 @@ class RegisterUser(UserCreationForm):
             )
 
         return email
+
+    def clean_phone(self):
+        phone = self.cleaned_data['phone']
+
+        re.compile('^[0-9]+$')
+
+        if not re.match(phone):
+            self.add_error(
+                'phone',
+                ValidationError(
+                    'Apenas Números, minimo de 10 digitos'
+                )
+            )
+
+        return phone
 
 
 class PetRegister(forms.ModelForm):

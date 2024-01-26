@@ -1,4 +1,3 @@
-from email.policy import default
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.contrib.auth.models import User
@@ -89,3 +88,10 @@ class PetImages(models.Model):
 
     def __str__(self):
         return f'Imagem pet - {self.pet}'
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    picture = models.ImageField(
+        upload_to='user_imgs/%Y', blank=True, null=True)
+    phone = models.CharField(max_length=80, blank=True, null=True)
