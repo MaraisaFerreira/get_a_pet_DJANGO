@@ -8,6 +8,11 @@
 {% block content %}
 <div class="form_container">
     <h1>Cadastrar</h1>
+    <div class="profile_image">
+        {% if image %}
+            <img src="{{image.url}}" alt="User Imagem">
+        {% endif %}
+    </div>
     {% include "pet/partials/_user_form.html" %}
 </div>
 {% endblock content %}
