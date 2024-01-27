@@ -29,11 +29,13 @@ class RegisterUser(UserCreationForm):
         max_length=15
     )
 
+    picture = forms.ImageField(label='Imagem', required=False)
+
     class Meta:
         model = User
         fields = (
-            'first_name', 'last_name', 'email',
-            'username', 'password1', 'password2',
+            'first_name', 'last_name', 'phone', 'email',
+            'username', 'picture', 'password1', 'password2',
         )
 
     def clean_email(self):
@@ -51,9 +53,7 @@ class RegisterUser(UserCreationForm):
     def clean_phone(self):
         phone = self.cleaned_data['phone']
 
-        re.compile('^[0-9]+$')
-
-        if not re.match(phone):
+        if not re.match('^[0-9]+$', phone):
             self.add_error(
                 'phone',
                 ValidationError(

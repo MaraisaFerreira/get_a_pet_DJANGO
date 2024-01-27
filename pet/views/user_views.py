@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from pet.forms import RegisterUser
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth, messages
+from pet.models import UserProfile
 
 
 def register_user(request):
@@ -11,7 +12,12 @@ def register_user(request):
         form = RegisterUser(request.POST)
 
         if form.is_valid():
-            form.save()
+            picture = request.FILES.get('picture')
+            phone = form.cleaned_data['phone']
+
+            user = form.save()
+            UserProfile(phone=phone, picture=picture,
+                        user_id=user.id).save()
             messages.success(request, 'Usuário Cadastrado!')
 
             return redirect('pets:login')
