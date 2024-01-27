@@ -53,3 +53,20 @@ def user_logout(request):
     auth.logout(request)
     messages.success(request, "Logout")
     return redirect('pets:home')
+
+
+def profile(request):
+    user = request.user
+    form = RegisterUser(instance=user)
+
+    image = UserProfile.objects.get(user_id=user.id).picture
+    print(f'image url {image}')
+
+    return render(
+        request,
+        'pet/user_register.html',
+        {
+            'form': form,
+            'image': image
+        }
+    )
