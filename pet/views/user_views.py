@@ -1,4 +1,5 @@
-from django.shortcuts import redirect, render
+from email.mime import image
+from django.shortcuts import get_object_or_404, redirect, render
 from pet.forms import RegisterUser
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth, messages
@@ -58,15 +59,38 @@ def user_logout(request):
 def profile(request):
     user = request.user
     form = RegisterUser(instance=user)
+    user_profile = UserProfile.objects.get(user_id=user.id)
 
-    image = UserProfile.objects.get(user_id=user.id).picture
-    print(f'image url {image}')
+    if request.method == 'POST':
+        form = RegisterUser(
+            request.POST,
+            instance=request.user,
+            request=request
+        )
+
+        if form.is_valid():
+            picture = request.FILES.get('picture')
+            phone = request.POST.get('phone')
+            form.save()
+
+            user_profile = get_object_or_404(UserProfile, user=user)
+            user_profile.phone = phone
+            if picture:
+                user_profile.picture = picture
+            user_profile.save()
+
+            auth.login(request, user)
+            return redirect('pets:my_pets')
+        else:
+            print(f'ERROS {form.errors}')
+
+        return redirect('pets:profile')
 
     return render(
         request,
         'pet/user_register.html',
         {
             'form': form,
-            'image': image
+            'image': user_profile.picture
         }
     )

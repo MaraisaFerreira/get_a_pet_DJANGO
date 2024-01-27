@@ -8,6 +8,10 @@ from pet.models import Pet
 
 
 class RegisterUser(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(RegisterUser, self).__init__(*args, **kwargs)
+
     first_name = forms.CharField(
         required=True,
         min_length=3
@@ -40,12 +44,14 @@ class RegisterUser(UserCreationForm):
 
     def clean_email(self):
         email = self.cleaned_data["email"]
+        stored_email = User.objects.filter(email=email)
 
-        if User.objects.filter(email=email).exists():
+        logged_user = self.request.user if self.request else None
+
+        if stored_email and logged_user.email != email:
             self.add_error(
                 'email',
-                ValidationError(
-                    'Esse email já existe, escolha outro.', code='invalid')
+                ValidationError('esse email já existe escolha outro.')
             )
 
         return email
@@ -62,6 +68,19 @@ class RegisterUser(UserCreationForm):
             )
 
         return phone
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        stored_username = User.objects.filter(username=username)
+        logged_user = self.request.user if self.request else None
+
+        if stored_username and logged_user.username != username:
+            self.add_error(
+                'username',
+                ValidationError('Esse nome usuario já existe')
+            )
+
+        return username
 
 
 class PetRegister(forms.ModelForm):
