@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from pet.models import Pet, PetImages
+from pet.models import Pet, PetImages, UserProfile
 from pet.forms import PetRegister
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
@@ -92,15 +92,13 @@ def my_pets(request):
     pets_list = []
 
     for pet in pets:
-        print(f'pet id {pet.id}')
         image = PetImages.objects.filter(pet_id=pet.id).first()
-        print(f'imagem {image}')
 
         adopter = None
         if pet.adopter_id:
             adopter = User.objects.get(id=pet.adopter_id)
-            print(f'Adopter {adopter.first_name}')
-        pets_list.append((pet, image, adopter))
+            phone = UserProfile.objects.get(user_id=adopter.id).phone
+        pets_list.append((pet, image, adopter, phone))
 
     return render(
         request,
@@ -215,7 +213,8 @@ def my_adoptions(request):
     for pet in pets:
         image = PetImages.objects.filter(pet_id=pet.id).first()
         owner = User.objects.get(id=pet.owner_id)
-        pet_list.append((pet, image, owner))
+        phone = UserProfile.objects.get(user_id=owner.id).phone
+        pet_list.append((pet, image, owner, phone))
 
     return render(
         request,

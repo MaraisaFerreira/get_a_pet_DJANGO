@@ -61,10 +61,10 @@ def user_logout(request):
 
 def profile(request):
     user = request.user
-    print(f'{"-"*10} USER {user}')
     user_form = RegisterUser(instance=user)
     user_profile = UserProfile.objects.get(user_id=user.id)
     profile_form = UserProfileForm(instance=user_profile)
+    image = UserProfile.objects.get(user_id=user.id).picture
 
     if request.method == 'POST':
         user_form = RegisterUser(
@@ -93,6 +93,7 @@ def profile(request):
         {
             'form': user_form,
             'profile': profile_form,
+            'image': image,
             'is_edit': True
         }
     )

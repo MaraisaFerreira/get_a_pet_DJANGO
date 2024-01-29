@@ -13,7 +13,7 @@
     </div>
     <div class='pet_container'>
         {% if pets %}
-            {% for pet, image, adopter in pets %}
+            {% for pet, image, adopter, phone in pets %}
                 <div  class='petlist_row'>
                     <img src="{{image.picture.url}}" alt="{{pet.name}}">
                     <span class='bold'>{{pet.name}}</span>
@@ -24,7 +24,7 @@
                                 <span class='bold'>{{adopter.first_name}}</span>
                                 <br></br>
                                 Telefone:
-                                <span class='bold'> Dono phone TEMP </span>
+                                <span class='bold'> {{phone}} </span>
                             </p>
                         {% else %}
                             <p>
