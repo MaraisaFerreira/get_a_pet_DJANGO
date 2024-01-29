@@ -89,6 +89,7 @@ def profile(request):
         'pet/user_register.html',
         {
             'form': user_form,
-            'profile': profile_form
+            'profile': profile_form,
+            'is_edit': True
         }
     )

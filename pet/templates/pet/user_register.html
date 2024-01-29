@@ -7,7 +7,11 @@
 
 {% block content %}
 <div class="form_container">
-    <h1>Cadastrar</h1>
+    {% if not is_edit %}
+        <h1>Cadastrar</h1>
+    {% else %}
+        <h1>Atualizar</h1>
+    {% endif %}
     <div class="profile_image">
         {% if image %}
             <img src="{{image.url}}" alt="User Imagem">
