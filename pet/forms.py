@@ -39,7 +39,7 @@ class RegisterUser(UserCreationForm):
 
         logged_user = self.request.user if self.request else None
 
-        if stored_email and logged_user.email != email:
+        if stored_email and logged_user and logged_user.email != email:
             self.add_error(
                 'email',
                 ValidationError('esse email já existe escolha outro.')

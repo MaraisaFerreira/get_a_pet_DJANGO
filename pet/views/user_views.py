@@ -8,17 +8,17 @@ from pet.models import UserProfile
 
 def register_user(request):
     form = RegisterUser()
+    profile = UserProfileForm()
 
     if request.method == 'POST':
         form = RegisterUser(request.POST)
+        profile = UserProfileForm(request.POST, files=request.FILES)
 
-        if form.is_valid():
-            picture = request.FILES.get('picture')
-            phone = form.cleaned_data['phone']
-
+        if form.is_valid() and profile.is_valid():
             user = form.save()
-            UserProfile(phone=phone, picture=picture,
-                        user_id=user.id).save()
+            user_profile = profile.save(commit=False)
+            user_profile.user_id = user.id
+            user_profile.save()
             messages.success(request, 'Usuário Cadastrado!')
 
             return redirect('pets:login')
@@ -26,7 +26,10 @@ def register_user(request):
     return render(
         request,
         'pet/user_register.html',
-        {'form': form}
+        {
+            'form': form,
+            'profile': profile
+        }
     )
 
 
