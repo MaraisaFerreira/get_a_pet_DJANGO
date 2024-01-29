@@ -9,6 +9,15 @@
             </div>
         </div>
     {% endfor %}
+    {% for field in profile %}
+        <div class="form-content">
+            <div class="form-group">
+                <label for="{{field.id_for_label}}">{{field.label}}</label>
+                {{field}}
+                {{field.errors}}
+            </div>
+        </div>
+    {% endfor %}
 
     <div class="form-content">
         <div class="form-group">

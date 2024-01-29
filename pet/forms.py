@@ -1,10 +1,9 @@
+import re
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django import forms
-import re
-
-from pet.models import Pet
+from pet.models import Pet, UserProfile
 
 
 class RegisterUser(UserCreationForm):
@@ -27,19 +26,11 @@ class RegisterUser(UserCreationForm):
         min_length=3
     )
 
-    phone = forms.CharField(
-        required=True,
-        min_length=10,
-        max_length=15
-    )
-
-    picture = forms.ImageField(label='Imagem', required=False)
-
     class Meta:
         model = User
         fields = (
-            'first_name', 'last_name', 'phone', 'email',
-            'username', 'picture', 'password1', 'password2',
+            'first_name', 'last_name', 'email',
+            'username', 'password1', 'password2',
         )
 
     def clean_email(self):
@@ -56,19 +47,6 @@ class RegisterUser(UserCreationForm):
 
         return email
 
-    def clean_phone(self):
-        phone = self.cleaned_data['phone']
-
-        if not re.match('^[0-9]+$', phone):
-            self.add_error(
-                'phone',
-                ValidationError(
-                    'Apenas Números, minimo de 10 digitos'
-                )
-            )
-
-        return phone
-
     def clean_username(self):
         username = self.cleaned_data['username']
         stored_username = User.objects.filter(username=username)
@@ -81,6 +59,33 @@ class RegisterUser(UserCreationForm):
             )
 
         return username
+
+
+class UserProfileForm(forms.ModelForm):
+    phone = forms.CharField(
+        required=True,
+        min_length=10,
+        max_length=15
+    )
+
+    picture = forms.ImageField(label='Imagem', required=False)
+
+    class Meta:
+        model = UserProfile
+        fields = ('phone', 'picture')
+
+    def clean_phone(self):
+        phone = self.cleaned_data['phone']
+
+        if not re.match('^[0-9]+$', phone):
+            self.add_error(
+                'phone',
+                ValidationError(
+                    'Apenas Números, mínimo de 10 dígitos'
+                )
+            )
+
+        return phone
 
 
 class PetRegister(forms.ModelForm):

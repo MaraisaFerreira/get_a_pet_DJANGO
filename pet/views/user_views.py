@@ -1,6 +1,6 @@
 from email.mime import image
 from django.shortcuts import get_object_or_404, redirect, render
-from pet.forms import RegisterUser
+from pet.forms import RegisterUser, UserProfileForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth, messages
 from pet.models import UserProfile
@@ -58,31 +58,29 @@ def user_logout(request):
 
 def profile(request):
     user = request.user
-    form = RegisterUser(instance=user)
+    print(f'{"-"*10} USER {user}')
+    user_form = RegisterUser(instance=user)
     user_profile = UserProfile.objects.get(user_id=user.id)
+    profile_form = UserProfileForm(instance=user_profile)
 
     if request.method == 'POST':
-        form = RegisterUser(
+        user_form = RegisterUser(
             request.POST,
             instance=request.user,
             request=request
         )
+        profile_form = UserProfileForm(
+            data=request.POST, files=request.FILES, instance=user_profile)
 
-        if form.is_valid():
-            picture = request.FILES.get('picture')
-            phone = request.POST.get('phone')
-            form.save()
-
-            user_profile = get_object_or_404(UserProfile, user=user)
-            user_profile.phone = phone
-            if picture:
-                user_profile.picture = picture
-            user_profile.save()
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Usuário atualizado.')
 
             auth.login(request, user)
             return redirect('pets:my_pets')
         else:
-            print(f'ERROS {form.errors}')
+            print(f'ERROS {user_form.errors}')
 
         return redirect('pets:profile')
 
@@ -90,7 +88,7 @@ def profile(request):
         request,
         'pet/user_register.html',
         {
-            'form': form,
-            'image': user_profile.picture
+            'form': user_form,
+            'profile': profile_form
         }
     )
