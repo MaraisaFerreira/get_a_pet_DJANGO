@@ -44,7 +44,6 @@ class Pet(models.Model):
         ('dog', 'Cachorro'),
         ('hamster', 'Hamster'),
         ('rabbit', 'Coelho'),
-        ('bird', 'Pássaro'),
     ]
 
     animal_type = models.CharField(
