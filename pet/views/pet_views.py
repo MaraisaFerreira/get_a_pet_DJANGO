@@ -95,6 +95,7 @@ def my_pets(request):
         image = PetImages.objects.filter(pet_id=pet.id).first()
 
         adopter = None
+        phone = None
         if pet.adopter_id:
             adopter = User.objects.get(id=pet.adopter_id)
             phone = UserProfile.objects.get(user_id=adopter.id).phone

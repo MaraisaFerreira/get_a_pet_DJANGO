@@ -32,7 +32,7 @@
                                 <span class='bold'>{{adopter.first_name}}</span>
                                 <br></br>
                                 Telefone:
-                                <span class='bold'> AD PHONE </span>
+                                <span class='bold'> {{phone}} </span>
                             </p>
                         {% endif %}
                     {% endif %}
@@ -45,7 +45,7 @@
                             <a href='{% url "pets:edit_pet" pet.id %}'>Editar</a>
                             <a href='{% url "pets:delete_pet" pet.id%}'>Excluir</a>
                         {% else %}
-                            <p>Pet já adotado.</p>
+                            <p>Pet adotado.</p>
                         {% endif %}
                     </div>
                 </div>
